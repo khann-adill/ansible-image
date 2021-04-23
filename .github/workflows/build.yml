@@ -15,15 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Test building image.
-        run: docker build . -t mak1806/ansible:1 -f tutorial/ansible/Dockerfile
-
+        run: docker build -t mak1806/ansible:1 .
       - name: Run the built image.
         run: docker run -itd --name ansible mak1806/ansible:1
-
       - name: Verify Ansible is accessible in the built image.
         run: docker exec --tty ansible ansible --version
+        
   release:
     name: Release to Hub Docker
     runs-on: ubuntu-latest
@@ -34,13 +32,11 @@ jobs:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ env.DOCKERHUB_TOKEN }}
-
       - name: Build and push image.
         uses: docker/build-push-action@v2
         with:
