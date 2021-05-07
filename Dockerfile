@@ -7,6 +7,10 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        openssh-client \
        apt-utils \
+       curl \
+       wget \
+       unzip \
+       vim \
        build-essential \
        locales \
        libffi-dev \
@@ -26,7 +30,7 @@ RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
 # Upgrade pip to latest version.
 RUN pip3 install --upgrade pip
 
-RUN pip3 install ansible
+RUN pip3 install ansible boto boto3 awscli
 # Install Ansible inventory file.
 RUN mkdir -p /etc/ansible
 RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts

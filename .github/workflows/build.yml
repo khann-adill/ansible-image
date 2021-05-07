@@ -16,9 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Test building image.
-        run: docker build -t mak1806/ansible:1 .
+        run: docker build -t mak1806/ansible:latest .
       - name: Run the built image.
-        run: docker run -itd --name ansible mak1806/ansible:1
+        run: docker run -itd --name ansible mak1806/ansible:latest
       - name: Verify Ansible is accessible in the built image.
         run: docker exec --tty ansible ansible --version
         
@@ -41,4 +41,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: mak1806/ansible:1
+          tags: mak1806/ansible:latest
