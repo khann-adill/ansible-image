@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 LABEL maintainer="Khan Adil"
 
 ENV DEBIAN_FRONTEND noninteractive
